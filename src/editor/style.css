@@ -1,0 +1,119 @@
+#editor {
+    height: 400px;
+}
+
+#editor .toolbar *:before,
+#editor .toolbar *:after {
+    display: block;
+}
+
+#editor .toolbar {
+    margin-bottom: 10px;
+    display: flex;
+}
+
+#editor .toolbar .box {
+    padding: 0 10px;
+    position: relative;
+    display: flex;
+}
+
+#editor .toolbar button:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+#editor .toolbar button {
+    cursor: pointer;
+    border: none;
+    background-color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 0 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#editor .toolbar button.is-active {
+    background-color: #333;
+    color: #fff;
+}
+
+#editor .toolbar .box:nth-child(n + 2):before {
+    content: "";
+    width: 1px;
+    height: 16px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #ddd;
+}
+
+#editor .toolbar .box button {
+    width: 27px;
+    height: 29px;
+    padding: 0;
+}
+
+/* 폰트 굵기 아이콘 */
+#editor .toolbar .bold {
+    font-weight: 600;
+}
+
+/* 폰트 기울임 아이콘 */
+#editor .toolbar .italic {
+    font-style: italic;
+}
+
+/* 폰트 취소선 아이콘 */
+#editor .toolbar .strike {
+    position: relative;
+}
+
+#editor .toolbar .strike:before {
+    content: "";
+    width: 10px;
+    height: 1px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #fff;
+    background-color: #000;
+}
+
+#editor .toolbar .is-active.strike:before {
+    border-color: #000;
+    background-color: #fff;
+}
+
+/* 구분선 */
+#editor .toolbar .line i {
+    width: 20px;
+    height: 1px;
+    background-color: #000;
+}
+
+/* 에디터 */
+#editor .ProseMirror {
+    outline: none;
+    padding: 20px;
+    height: 400px;
+    border: 1px solid;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#editor .ProseMirror p {
+    margin: 10px 0;
+}
+
+#editor .ProseMirror ol {
+    padding-left: 30px;
+}

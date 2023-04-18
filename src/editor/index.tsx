@@ -1,6 +1,7 @@
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Toolbar from "./Toolbar";
+import "./style.css";
 
 export default function Editor() {
     const editor = useEditor({
@@ -11,7 +12,7 @@ export default function Editor() {
     return (
         <div id="editor">
             <Toolbar editor={editor} />
-            <EditorContent editor={editor} style={{ border: "1px solid" }} />
+            <EditorContent editor={editor} />
         </div>
     );
 }
