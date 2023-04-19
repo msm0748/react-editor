@@ -1,4 +1,3 @@
-// import TextStyle from "@tiptap/extension-text-style";
 import { Extension } from "@tiptap/react";
 
 declare module "@tiptap/core" {

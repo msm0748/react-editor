@@ -15,12 +15,16 @@ export default function Editor() {
         extensions: [StarterKit, Color, TextStyle, FontSize],
         content: "",
         onCreate({ editor }) {
-            editor.chain().focus().setFontSize("16px").run();
+            editor.chain().focus().setFontSize(`${fontSize}`).run();
         },
         onUpdate({ editor }) {
             // setEditorContent(editor.getHTML());
             if (editor.isEmpty) {
-                editor.chain().focus().setFontSize(`${fontSize}px`).run();
+                const currentFontSize = editor.getAttributes("textStyle").fontSize;
+                const newFontSize = currentFontSize || `${fontSize}`;
+
+                editor.chain().focus().setFontSize(newFontSize).run();
+                setFontSize(newFontSize);
             }
         },
     });
@@ -30,10 +34,8 @@ export default function Editor() {
             if (!editor) return null;
             const button = event.target as HTMLButtonElement;
             const fontSize = button.innerText;
-            setFontSize(fontSize);
+            setFontSize(`${fontSize}px`);
             editor.chain().focus().setFontSize(`${fontSize}px`).run();
-
-            console.log(editor.chain().focus().setFontSize(""));
         },
         [editor]
     );

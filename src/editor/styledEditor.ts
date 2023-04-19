@@ -115,7 +115,7 @@ export const StyledEditor = styled.div<Props>`
 
             /* 텍스트 없을 때 커서 사이즈 유지 */
             &:last-child:has(br) {
-                font-size: ${(props) => props.fontSize}px;
+                font-size: ${(props) => props.fontSize};
             }
         }
 
