@@ -2,15 +2,25 @@ import { useEditor } from "@tiptap/react";
 
 type MenuBarProps = {
     editor: ReturnType<typeof useEditor>;
+    onFontSizeChange: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 };
 
-export default function MenuBar({ editor }: MenuBarProps) {
+const fontSize = ["14", "16", "18", "24", "28", "30", "34", "38"];
+
+export default function MenuBar({ editor, onFontSizeChange }: MenuBarProps) {
     if (!editor) {
         return null;
     }
 
     return (
         <div className="toolbar">
+            <div className="box">
+                {fontSize.map((value) => (
+                    <button key={value} onClick={onFontSizeChange} className={editor.isActive("textStyle", { fontSize: `${value}px` }) ? "is-active" : ""}>
+                        {value}
+                    </button>
+                ))}
+            </div>
             <div className="box">
                 <button
                     onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
@@ -62,7 +72,7 @@ export default function MenuBar({ editor }: MenuBarProps) {
                     <svg
                         stroke="currentColor"
                         fill="currentColor"
-                        stroke-width="0"
+                        strokeWidth="0"
                         viewBox="0 0 24 24"
                         height="20"
                         width="20"
@@ -79,7 +89,7 @@ export default function MenuBar({ editor }: MenuBarProps) {
                     <svg
                         stroke="currentColor"
                         fill="currentColor"
-                        stroke-width="0"
+                        strokeWidth="0"
                         viewBox="0 0 24 24"
                         height="20"
                         width="20"
