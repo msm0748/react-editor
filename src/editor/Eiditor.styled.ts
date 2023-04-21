@@ -1,10 +1,6 @@
 import styled from "@emotion/styled";
 
-type Props = {
-    fontSize?: string;
-};
-
-export const StyledEditor = styled.div<Props>`
+export const StyledEditor = styled.div`
     .toolbar {
         margin-bottom: 10px;
         display: flex;
@@ -112,11 +108,6 @@ export const StyledEditor = styled.div<Props>`
 
         p {
             margin: 10px 0;
-
-            /* 텍스트 없을 때 커서 사이즈 유지 */
-            &:last-child:has(br) {
-                font-size: ${(props) => props.fontSize};
-            }
         }
 
         ol {

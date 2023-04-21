@@ -1,41 +1,36 @@
 import { useEditor } from "@tiptap/react";
 
-type MenuBarProps = {
+interface Props {
     editor: ReturnType<typeof useEditor>;
-    onFontSizeChange: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
-};
+}
 
-const fontSize = ["14", "16", "18", "24", "28", "30", "34", "38"];
-
-export default function MenuBar({ editor, onFontSizeChange }: MenuBarProps) {
+export default function MenuBar({ editor }: Props) {
     if (!editor) {
         return null;
     }
 
+    console.log(editor.getAttributes("textStyle").fontSize);
+
     return (
         <div className="toolbar">
             <div className="box">
-                {fontSize.map((value) => (
-                    <button key={value} onClick={onFontSizeChange} className={editor.isActive("textStyle", { fontSize: `${value}px` }) ? "is-active" : ""}>
-                        {value}
-                    </button>
-                ))}
-            </div>
-            <div className="box">
                 <button
-                    onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
+                    onClick={() => {
+                        console.log(editor.getAttributes("textStyle").fontSize);
+                        editor.chain().focus().setHeading({ level: 1 }).run();
+                    }}
                     className={editor.isActive("heading", { level: 1 }) ? "is-active" : ""}
                 >
                     H1
                 </button>
                 <button
-                    onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+                    onClick={() => editor.chain().focus().setHeading({ level: 2 }).run()}
                     className={editor.isActive("heading", { level: 2 }) ? "is-active" : ""}
                 >
                     H2
                 </button>
                 <button
-                    onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+                    onClick={() => editor.chain().focus().setHeading({ level: 3 }).run()}
                     className={editor.isActive("heading", { level: 3 }) ? "is-active" : ""}
                 >
                     H3
