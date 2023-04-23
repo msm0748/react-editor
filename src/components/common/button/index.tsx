@@ -6,16 +6,11 @@ interface MenuButtonProps {
     title?: string;
     action?: () => void;
     isActive?: () => boolean | null;
-    wrapperClassName?: string;
 }
 
-export const MenuButton = ({ icon, title, action, isActive, wrapperClassName }: MenuButtonProps) => {
+export const MenuButton = ({ icon, title, action, isActive }: MenuButtonProps) => {
     return (
-        <StyledMenuButton
-            className={`menu-item${isActive && isActive() ? " is-active" : ""} ${wrapperClassName ? wrapperClassName : ""}`}
-            onClick={action}
-            title={title}
-        >
+        <StyledMenuButton className={`menu-item${isActive && isActive() ? " is-active" : ""}`} onClick={action} title={title}>
             {icon}
         </StyledMenuButton>
     );

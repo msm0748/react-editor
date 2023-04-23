@@ -3,6 +3,7 @@ import StarterKit from "@tiptap/starter-kit";
 import { Color } from "@tiptap/extension-color";
 import TextStyle from "@tiptap/extension-text-style";
 import TextAlign from "@tiptap/extension-text-align";
+import Underline from "@tiptap/extension-underline";
 import Toolbar from "./Toolbar";
 import { StyledEditor } from "./Eiditor.styled";
 
@@ -14,6 +15,7 @@ export default function Editor() {
             StarterKit,
             Color,
             TextStyle,
+            Underline,
             TextAlign.configure({
                 types: ["heading", "paragraph"],
             }),
