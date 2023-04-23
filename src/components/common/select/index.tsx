@@ -9,6 +9,8 @@ import {
     StyledSelectedOption,
     StyledColorOptionList,
     StyledColorIcon,
+    StyledColorOptionContainer,
+    StyledColorOptionWrap,
 } from "./Select.styled";
 import { useModal } from "./useModal";
 import { StyledMenuButton } from "../button/Button.styld";
@@ -48,22 +50,42 @@ export function DropDown({ options }: Props) {
 
 export function ColorSelect({ options }: Props) {
     const { isOpen, selectRef, toggleOpen, handleOptionClick } = useModal();
-    const [color, setColor] = useState("#000000");
-    const handleSelectedColor = (option: OptionType, title: string) => {
+    const [colors, setColors] = useState<OptionType[]>([]);
+    const handleSelectedColor = (option: OptionType) => {
         handleOptionClick(option);
-        setColor(title);
+        // 최근 사용한 글자색 7개 추출
+        setColors((prev: OptionType[]) => {
+            const newColors = [option, ...prev.filter((value) => value.title !== option.title)].slice(0, 7);
+            return newColors;
+        });
     };
+
     return (
         <StyledSelectContainer ref={selectRef}>
             <StyledMenuButton className={`menu-item${isOpen ? " is-active" : ""}`} onClick={toggleOpen}>
-                <StyledColorIcon bgColor={color}>T</StyledColorIcon>
+                <StyledColorIcon bgColor={colors.length > 0 ? colors[0].title : "#000"}>T</StyledColorIcon>
             </StyledMenuButton>
             {isOpen && (
-                <StyledColorOptionList>
-                    {options.map((option, index) => (
-                        <StyledColorOption key={index} bgColor={option.title} onClick={() => handleSelectedColor(option, option.title)}></StyledColorOption>
-                    ))}
-                </StyledColorOptionList>
+                <StyledColorOptionContainer>
+                    {colors.length > 0 && (
+                        <StyledColorOptionWrap>
+                            <span>최근 사용한 글자색</span>
+                            <StyledColorOptionList>
+                                {colors.map((option, index) => (
+                                    <StyledColorOption key={index} bgColor={option.title} onClick={() => handleSelectedColor(option)}></StyledColorOption>
+                                ))}
+                            </StyledColorOptionList>
+                        </StyledColorOptionWrap>
+                    )}
+
+                    <StyledColorOptionWrap style={{ borderTop: "1px solid hsla(0,0%,79%,.3)" }}>
+                        <StyledColorOptionList>
+                            {options.map((option, index) => (
+                                <StyledColorOption key={index} bgColor={option.title} onClick={() => handleSelectedColor(option)}></StyledColorOption>
+                            ))}
+                        </StyledColorOptionList>
+                    </StyledColorOptionWrap>
+                </StyledColorOptionContainer>
             )}
         </StyledSelectContainer>
     );

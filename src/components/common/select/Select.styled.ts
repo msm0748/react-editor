@@ -56,20 +56,30 @@ export const StyledOption = styled.div<{ isSelected: boolean }>`
     }
 `;
 
-export const StyledColorOptionList = styled.div`
-    display: flex;
-    box-sizing: border-box;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 5px;
+export const StyledColorOptionContainer = styled.div`
     position: absolute;
     top: 100%;
     left: 0;
-    width: 170px;
+    width: 168px;
     border: 1px solid #ccc;
+    z-index: 10;
     border-radius: 0 0 4px 4px;
     background-color: #fff;
-    z-index: 10;
+    box-sizing: border-box;
+`;
+
+export const StyledColorOptionWrap = styled.div`
+    padding: 5px 6px;
+    span {
+        opacity: 0.5;
+        font-size: 13px;
+        color: #333;
+    }
+`;
+
+export const StyledColorOptionList = styled.div`
+    display: flex;
+    flex-wrap: wrap;
 `;
 
 export const StyledColorOption = styled.div<{ bgColor: string }>`
