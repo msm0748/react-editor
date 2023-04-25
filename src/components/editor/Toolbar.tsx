@@ -1,8 +1,8 @@
 import { useEditor } from "@tiptap/react";
 import { Fragment } from "react";
-import { MenuButton } from "../components/common/button";
-import Icon from "../components/common/Icon";
-import { ColorSelect, DropDown } from "../components/common/select";
+import { MenuButton } from "../common/button";
+import Icon from "../common/Icon";
+import { ColorSelect, DropDown } from "../common/select";
 
 interface Props {
     editor: ReturnType<typeof useEditor>;
