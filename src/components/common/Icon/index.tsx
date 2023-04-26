@@ -8,7 +8,7 @@ import {
     MdFormatBold,
 } from "react-icons/md";
 import { RiStrikethrough2, RiItalic, RiUnderline } from "react-icons/ri";
-
+import { RxDividerHorizontal } from "react-icons/rx";
 type IconName =
     | "orderedList"
     | "unorderedList"
@@ -19,7 +19,8 @@ type IconName =
     | "strikethrough"
     | "bold"
     | "italic"
-    | "underline";
+    | "underline"
+    | "horizontalRule";
 
 const iconList: Record<IconName, JSX.Element> = {
     orderedList: <MdFormatListNumbered size={20} />,
@@ -32,6 +33,7 @@ const iconList: Record<IconName, JSX.Element> = {
     bold: <MdFormatBold size={20} />,
     italic: <RiItalic size={20} />,
     underline: <RiUnderline size={20} />,
+    horizontalRule: <RxDividerHorizontal size={28} />,
 };
 
 interface IconProps {

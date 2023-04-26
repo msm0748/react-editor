@@ -23,11 +23,4 @@ export const StyledMenuButton = styled.button`
         background-color: #333;
         color: #fff;
     }
-
-    /* 구분선 */
-    &.line i {
-        width: 20px;
-        height: 1px;
-        background-color: #000;
-    }
 `;

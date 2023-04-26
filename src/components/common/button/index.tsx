@@ -4,7 +4,7 @@ import { StyledMenuButton } from "./Button.styld";
 interface MenuButtonProps {
     icon?: string | ReactNode;
     title?: string;
-    action?: () => void;
+    action?: () => boolean;
     isActive?: () => boolean | null;
 }
 

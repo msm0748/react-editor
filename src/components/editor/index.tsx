@@ -28,7 +28,7 @@ export default function Editor() {
 
     return (
         <StyledEditor>
-            <Toolbar editor={editor} />
+            {editor && <Toolbar editor={editor} />}
             <EditorContent editor={editor} />
         </StyledEditor>
     );

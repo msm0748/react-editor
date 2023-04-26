@@ -16,10 +16,10 @@ import { useModal } from "./useModal";
 import { StyledMenuButton } from "../button/Button.styld";
 
 interface OptionType {
+    icon?: string | ReactNode;
     title: string;
     action: () => void;
     isActive: (value?: string) => boolean;
-    icon?: string | ReactNode;
 }
 
 interface Props {
