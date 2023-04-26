@@ -6,17 +6,11 @@ interface OptionType {
     isActive: () => boolean;
 }
 
-interface UseSelectReturn {
-    isOpen: boolean;
-    selectRef: React.RefObject<HTMLDivElement>;
-    toggleOpen: () => void;
-    handleOptionClick: (option: OptionType) => void;
-}
+type UseSelectReturn = [isOpen: boolean, selectRef: React.RefObject<HTMLDivElement>, toggleOpen: () => void, handleOptionClick: (option: OptionType) => void];
 
 export function useModal(): UseSelectReturn {
     const [isOpen, setIsOpen] = useState(false);
     const selectRef = useRef<HTMLDivElement>(null);
-
     const toggleOpen = useCallback(() => {
         setIsOpen(!isOpen);
     }, [isOpen]);
@@ -39,10 +33,5 @@ export function useModal(): UseSelectReturn {
         };
     }, []);
 
-    return {
-        isOpen,
-        selectRef,
-        toggleOpen,
-        handleOptionClick,
-    };
+    return [isOpen, selectRef, toggleOpen, handleOptionClick];
 }

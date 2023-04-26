@@ -9,8 +9,6 @@ interface Props {
 }
 
 export default function MenuBar({ editor }: Props) {
-    const editorCommand = editor.chain().focus();
-
     const menuItems = [
         [
             {
@@ -18,22 +16,22 @@ export default function MenuBar({ editor }: Props) {
                 options: [
                     {
                         title: "제목1",
-                        action: () => editorCommand.toggleHeading({ level: 1 }).run(),
+                        action: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
                         isActive: () => editor.isActive("heading", { level: 1 }),
                     },
                     {
                         title: "제목2",
-                        action: () => editorCommand.toggleHeading({ level: 2 }).run(),
+                        action: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
                         isActive: () => editor.isActive("heading", { level: 2 }),
                     },
                     {
                         title: "제목3",
-                        action: () => editorCommand.toggleHeading({ level: 3 }).run(),
+                        action: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
                         isActive: () => editor.isActive("heading", { level: 3 }),
                     },
                     {
                         title: "본문",
-                        action: () => editorCommand.setParagraph().run(),
+                        action: () => editor.chain().focus().setParagraph().run(),
                         isActive: () => editor.isActive("paragraph"),
                     },
                 ],
@@ -44,35 +42,35 @@ export default function MenuBar({ editor }: Props) {
                 type: "button",
                 icon: <Icon icon="bold" />,
                 title: "굵기",
-                action: () => editorCommand.toggleBold().run(),
+                action: () => editor.chain().focus().toggleBold().run(),
                 isActive: () => editor.isActive("bold"),
             },
             {
                 type: "button",
                 icon: <Icon icon="italic" />,
                 title: "기울기",
-                action: () => editorCommand.toggleItalic().run(),
+                action: () => editor.chain().focus().toggleItalic().run(),
                 isActive: () => editor.isActive("italic"),
             },
             {
                 type: "button",
                 icon: <Icon icon="underline" />,
                 title: "밑줄",
-                action: () => editorCommand.toggleUnderline().run(),
+                action: () => editor.chain().focus().toggleUnderline().run(),
                 isActive: () => editor.isActive("underline"),
             },
             {
                 type: "button",
                 icon: <Icon icon="strikethrough" />,
                 title: "취소선",
-                action: () => editorCommand.toggleStrike().run(),
+                action: () => editor.chain().focus().toggleStrike().run(),
                 isActive: () => editor.isActive("strike"),
             },
             {
                 type: "colorSelect",
                 options: colors.map((val) => ({
                     title: val,
-                    action: () => editorCommand.setColor(val).run(),
+                    action: () => editor.chain().focus().setColor(val).run(), // editor.chain().focus() 함수 사용 시 최근 사용한 글자색 클릭 시 에러 발생
                     isActive: () => editor.isActive("textStyle", { color: val }),
                 })),
             },
@@ -82,14 +80,14 @@ export default function MenuBar({ editor }: Props) {
                 type: "button",
                 icon: <Icon icon={"unorderedList"} />,
                 title: "기호목록",
-                action: () => editorCommand.toggleBulletList().run(),
+                action: () => editor.chain().focus().toggleBulletList().run(),
                 isActive: () => editor.isActive("bulletList"),
             },
             {
                 type: "button",
                 icon: <Icon icon={"orderedList"} />,
                 title: "순서목록",
-                action: () => editorCommand.toggleOrderedList().run(),
+                action: () => editor.chain().focus().toggleOrderedList().run(),
                 isActive: () => editor.isActive("orderedList"),
             },
         ],
@@ -98,28 +96,28 @@ export default function MenuBar({ editor }: Props) {
                 type: "button",
                 icon: <Icon icon="alignLeft" />,
                 title: "왼쪽정렬",
-                action: () => editorCommand.setTextAlign("left").run(),
+                action: () => editor.chain().focus().setTextAlign("left").run(),
                 isActive: () => editor.isActive({ textAlign: "left" }),
             },
             {
                 type: "button",
                 icon: <Icon icon="alignCenter" />,
                 title: "가운데 정렬",
-                action: () => editorCommand.setTextAlign("center").run(),
+                action: () => editor.chain().focus().setTextAlign("center").run(),
                 isActive: () => editor.isActive({ textAlign: "center" }),
             },
             {
                 type: "button",
                 icon: <Icon icon="alignRight" />,
                 title: "오른쪽 정렬",
-                action: () => editorCommand.setTextAlign("right").run(),
+                action: () => editor.chain().focus().setTextAlign("right").run(),
                 isActive: () => editor.isActive({ textAlign: "right" }),
             },
             {
                 type: "button",
                 icon: <Icon icon="alignJustify" />,
                 title: "양쪽 정렬",
-                action: () => editorCommand.setTextAlign("justify").run(),
+                action: () => editor.chain().focus().setTextAlign("justify").run(),
                 isActive: () => editor.isActive({ textAlign: "justify" }),
             },
         ],
@@ -128,7 +126,7 @@ export default function MenuBar({ editor }: Props) {
                 type: "button",
                 icon: <Icon icon="horizontalRule" />,
                 title: "구분선",
-                action: () => editorCommand.setHorizontalRule().run(),
+                action: () => editor.chain().focus().setHorizontalRule().run(),
             },
         ],
     ];

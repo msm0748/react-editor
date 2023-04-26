@@ -8,6 +8,7 @@ export const StyledEditor = styled.div`
         border: 1px solid;
         overflow-y: auto;
         overflow-x: hidden;
+        caret-color: #000;
 
         &:focus {
             outline: none;

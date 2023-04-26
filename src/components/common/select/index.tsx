@@ -27,7 +27,7 @@ interface Props {
 }
 
 export function DropDown({ options }: Props) {
-    const { isOpen, selectRef, toggleOpen, handleOptionClick } = useModal();
+    const [isOpen, selectRef, toggleOpen, handleOptionClick] = useModal();
 
     return (
         <StyledSelectContainer ref={selectRef}>
@@ -49,7 +49,7 @@ export function DropDown({ options }: Props) {
 }
 
 export function ColorSelect({ options }: Props) {
-    const { isOpen, selectRef, toggleOpen, handleOptionClick } = useModal();
+    const [isOpen, selectRef, toggleOpen, handleOptionClick] = useModal();
     const [colors, setColors] = useState<OptionType[]>([]);
     const handleSelectedColor = (option: OptionType) => {
         handleOptionClick(option);
@@ -63,7 +63,7 @@ export function ColorSelect({ options }: Props) {
     return (
         <StyledSelectContainer ref={selectRef}>
             <StyledMenuButton className={`menu-item${isOpen ? " is-active" : ""}`} onClick={toggleOpen}>
-                <StyledColorIcon bgColor={colors.length > 0 ? colors[0].title : "#000"}>T</StyledColorIcon>
+                <StyledColorIcon bgColor={options.find((option) => option.isActive() === true)?.title}>T</StyledColorIcon>
             </StyledMenuButton>
             {isOpen && (
                 <StyledColorOptionContainer>
@@ -81,7 +81,12 @@ export function ColorSelect({ options }: Props) {
                     <StyledColorOptionWrap style={{ borderTop: "1px solid hsla(0,0%,79%,.3)" }}>
                         <StyledColorOptionList>
                             {options.map((option, index) => (
-                                <StyledColorOption key={index} bgColor={option.title} onClick={() => handleSelectedColor(option)}></StyledColorOption>
+                                <StyledColorOption
+                                    key={index}
+                                    isSelected={option.isActive()}
+                                    bgColor={option.title}
+                                    onClick={() => handleSelectedColor(option)}
+                                ></StyledColorOption>
                             ))}
                         </StyledColorOptionList>
                     </StyledColorOptionWrap>

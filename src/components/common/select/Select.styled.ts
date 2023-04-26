@@ -82,16 +82,27 @@ export const StyledColorOptionList = styled.div`
     flex-wrap: wrap;
 `;
 
-export const StyledColorOption = styled.div<{ bgColor: string }>`
+export const StyledColorOption = styled.div<{ bgColor: string; isSelected?: boolean }>`
     width: 16px;
     height: 16px;
     margin: 2px;
     border: 1px solid #ddd;
     background-color: ${({ bgColor }) => bgColor};
+    position: relative;
     cursor: pointer;
+    &:before {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: -2px;
+        left: -2px;
+        border: ${({ isSelected }) => (isSelected ? "2px solid #444" : "")};
+        content: ${({ isSelected }) => (isSelected ? "''" : "none")};
+    }
 `;
 
-export const StyledColorIcon = styled.span<{ bgColor: string }>`
+export const StyledColorIcon = styled.span<{ bgColor: string | undefined }>`
     position: relative;
     width: 20px;
     height: 20px;
@@ -106,7 +117,7 @@ export const StyledColorIcon = styled.span<{ bgColor: string }>`
         height: 7px;
         border-radius: 100%;
         box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
-        background-color: ${({ bgColor }) => bgColor};
+        background-color: ${({ bgColor }) => (bgColor ? bgColor : "#000")};
         content: "";
     }
 `;
