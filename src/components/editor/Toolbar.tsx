@@ -68,11 +68,33 @@ export default function MenuBar({ editor }: Props) {
             },
             {
                 type: "colorSelect",
-                options: colors.map((val) => ({
-                    title: val,
-                    action: () => editor.chain().focus().setColor(val).run(), // editor.chain().focus() 함수 사용 시 최근 사용한 글자색 클릭 시 에러 발생
-                    isActive: () => editor.isActive("textStyle", { color: val }),
-                })),
+                options: [
+                    {
+                        title: "default",
+                        action: () => editor.chain().focus().setColor("#000000").run(),
+                        isActive: () => false,
+                    },
+                    ...colors.map((val) => ({
+                        title: val,
+                        action: () => editor.chain().focus().setColor(val).run(),
+                        isActive: () => editor.isActive("textStyle", { color: val }),
+                    })),
+                ],
+            },
+            {
+                type: "bgColorSelect",
+                options: [
+                    {
+                        title: "default",
+                        action: () => editor.chain().focus().setHighlight({ color: "#ffffff" }).run(),
+                        isActive: () => false,
+                    },
+                    ...colors.map((val) => ({
+                        title: val,
+                        action: () => editor.chain().focus().setHighlight({ color: val }).run(),
+                        isActive: () => editor.isActive("highlight", { color: val }),
+                    })),
+                ],
             },
         ],
         [

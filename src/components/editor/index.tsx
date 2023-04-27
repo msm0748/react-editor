@@ -6,6 +6,7 @@ import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import Toolbar from "./Toolbar";
 import { StyledEditor } from "./Eiditor.styled";
+import Highlight from "@tiptap/extension-highlight";
 
 export default function Editor() {
     // const [editorContent, setEditorContent] = useState("");
@@ -19,6 +20,7 @@ export default function Editor() {
             TextAlign.configure({
                 types: ["heading", "paragraph"],
             }),
+            Highlight.configure({ multicolor: true }),
         ],
         content: "",
         onUpdate({ editor }) {

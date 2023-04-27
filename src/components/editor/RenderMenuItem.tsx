@@ -32,7 +32,9 @@ export default function RenderMenuItem(item: MenuItem) {
         case "button":
             return <MenuButton icon={item.icon} action={item.action} isActive={item.isActive} title={item.title} />;
         case "colorSelect":
-            return item.options ? <ColorSelect options={item.options} /> : null;
+            return item.options ? <ColorSelect options={item.options} mode="color" /> : null;
+        case "bgColorSelect":
+            return item.options ? <ColorSelect options={item.options} mode="bgColor" /> : null;
         default:
             return null;
     }

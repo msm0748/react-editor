@@ -87,7 +87,8 @@ export const StyledColorOption = styled.div<{ bgColor: string; isSelected?: bool
     height: 16px;
     margin: 2px;
     border: 1px solid #ddd;
-    background-color: ${({ bgColor }) => bgColor};
+    background: ${({ bgColor }) => (bgColor === "default" ? "linear-gradient(-45deg, #fff 48%, #ff001e 0, #ff001e 52%, #fff 0) no-repeat" : bgColor)};
+    background-size: 100% 100%;
     position: relative;
     cursor: pointer;
     &:before {
@@ -108,6 +109,7 @@ export const StyledColorIcon = styled.span<{ bgColor: string | undefined }>`
     height: 20px;
     left: -3px;
     font-size: 17px;
+
     &:after {
         display: block;
         position: absolute;
@@ -120,4 +122,14 @@ export const StyledColorIcon = styled.span<{ bgColor: string | undefined }>`
         background-color: ${({ bgColor }) => (bgColor ? bgColor : "#000")};
         content: "";
     }
+`;
+
+export const StyledBgColorIcon = styled.span<{ bgColor: string | undefined; textColor: string }>`
+    position: relative;
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    color: ${({ textColor }) => textColor};
+    background-color: ${({ bgColor }) => (bgColor ? bgColor : "#fff")};
 `;
