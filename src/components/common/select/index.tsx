@@ -1,4 +1,6 @@
 import { ReactNode, useState } from "react";
+import { ChromePicker } from "react-color";
+
 import {
     StyledArrowIcon,
     StyledColorOption,
@@ -12,6 +14,9 @@ import {
     StyledColorOptionContainer,
     StyledColorOptionWrap,
     StyledBgColorIcon,
+    StyledMoreButton,
+    StyledChromePicker,
+    StyledConfirmButton,
 } from "./Select.styled";
 import { useModal } from "./useModal";
 import { StyledMenuButton } from "../button/Button.styld";
@@ -19,8 +24,8 @@ import { StyledMenuButton } from "../button/Button.styld";
 interface OptionType {
     icon?: string | ReactNode;
     title: string;
-    action: () => void;
-    isActive: (value?: string) => boolean;
+    action: (value?: string) => void;
+    isActive: () => boolean;
 }
 
 interface Props {
@@ -51,11 +56,15 @@ export function DropDown({ options }: Props) {
 
 interface ColorProps extends Props {
     mode: "color" | "bgColor";
+    changeColor?: (value: string) => boolean;
 }
 
-export function ColorSelect({ options, mode }: ColorProps) {
+export function ColorSelect({ options, mode, changeColor }: ColorProps) {
     const [isOpen, selectRef, toggleOpen, handleOptionClick] = useModal();
+    const [color, setColor] = useState<string>("");
     const [colors, setColors] = useState<OptionType[]>([]);
+    const [isChromePickerOpen, setIsChromePickerOpen] = useState(false);
+
     const handleSelectedColor = (option: OptionType) => {
         handleOptionClick(option);
 
@@ -64,6 +73,10 @@ export function ColorSelect({ options, mode }: ColorProps) {
             const newColors = [option, ...prev.filter((value) => value.title !== option.title)].slice(0, 7);
             return newColors;
         });
+
+        setColor(option.title);
+
+        setIsChromePickerOpen(false);
     };
 
     const calculateTextColor = (backgroundColor: string | undefined) => {
@@ -80,15 +93,20 @@ export function ColorSelect({ options, mode }: ColorProps) {
         return "#000";
     };
 
+    const handleColorChange = () => {
+        if (changeColor) {
+            changeColor(color);
+        }
+        toggleOpen();
+        setIsChromePickerOpen((prev) => !prev);
+    };
+
     return (
         <StyledSelectContainer ref={selectRef}>
             <StyledMenuButton className={"menu-ite"} onClick={toggleOpen}>
-                {mode === "color" && <StyledColorIcon bgColor={options.find((option) => option.isActive() === true)?.title}>T</StyledColorIcon>}
+                {mode === "color" && <StyledColorIcon bgColor={color}>T</StyledColorIcon>}
                 {mode === "bgColor" && (
-                    <StyledBgColorIcon
-                        bgColor={options.find((option) => option.isActive() === true)?.title}
-                        textColor={calculateTextColor(options.find((option) => option.isActive() === true)?.title)}
-                    >
+                    <StyledBgColorIcon bgColor={color} textColor={calculateTextColor(color)}>
                         T
                     </StyledBgColorIcon>
                 )}
@@ -107,7 +125,7 @@ export function ColorSelect({ options, mode }: ColorProps) {
                         </StyledColorOptionWrap>
                     )}
 
-                    <StyledColorOptionWrap style={{ borderTop: "1px solid hsla(0,0%,79%,.3)" }}>
+                    <StyledColorOptionWrap>
                         <StyledColorOptionList>
                             {options.map((option, index) => (
                                 <StyledColorOption
@@ -118,6 +136,16 @@ export function ColorSelect({ options, mode }: ColorProps) {
                                 ></StyledColorOption>
                             ))}
                         </StyledColorOptionList>
+                        {isChromePickerOpen && (
+                            <StyledChromePicker>
+                                <ChromePicker disableAlpha color={color} onChange={(color) => setColor(color.hex)} />
+                                <StyledConfirmButton onClick={handleColorChange}>확인</StyledConfirmButton>
+                            </StyledChromePicker>
+                        )}
+
+                        <StyledMoreButton isOpen={isChromePickerOpen} onClick={() => setIsChromePickerOpen((prev) => !prev)}>
+                            <span>{isChromePickerOpen ? "접기" : "더 보기"}</span>
+                        </StyledMoreButton>
                     </StyledColorOptionWrap>
                 </StyledColorOptionContainer>
             )}

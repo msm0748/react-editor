@@ -80,6 +80,7 @@ export default function MenuBar({ editor }: Props) {
                         isActive: () => editor.isActive("textStyle", { color: val }),
                     })),
                 ],
+                changeColor: (value: string) => editor.chain().focus().setColor(value).run(),
             },
             {
                 type: "bgColorSelect",
@@ -95,6 +96,7 @@ export default function MenuBar({ editor }: Props) {
                         isActive: () => editor.isActive("highlight", { color: val }),
                     })),
                 ],
+                changeColor: (value: string) => editor.chain().focus().setHighlight({ color: value }).run(),
             },
         ],
         [

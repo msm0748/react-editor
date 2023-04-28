@@ -17,9 +17,10 @@ interface ColorSelectMenuItem {
         action: () => boolean;
         isActive: () => boolean;
     }[];
+    changeColor?: (value: string) => boolean;
+    action?: undefined;
     icon?: undefined;
     title?: undefined;
-    action?: undefined;
     isActive?: undefined;
 }
 
@@ -32,9 +33,9 @@ export default function RenderMenuItem(item: MenuItem) {
         case "button":
             return <MenuButton icon={item.icon} action={item.action} isActive={item.isActive} title={item.title} />;
         case "colorSelect":
-            return item.options ? <ColorSelect options={item.options} mode="color" /> : null;
+            return item.options ? <ColorSelect options={item.options} changeColor={item.changeColor} mode="color" /> : null;
         case "bgColorSelect":
-            return item.options ? <ColorSelect options={item.options} mode="bgColor" /> : null;
+            return item.options ? <ColorSelect options={item.options} changeColor={item.changeColor} mode="bgColor" /> : null;
         default:
             return null;
     }
