@@ -108,6 +108,14 @@ export const StyledColorOption = styled.div<{ bgColor: string; isSelected?: bool
         border: ${({ isSelected }) => (isSelected ? "2px solid #444" : "")};
         content: ${({ isSelected }) => (isSelected ? "''" : "none")};
     }
+    &:hover:before {
+        border: 2px solid #444;
+        content: "";
+    }
+`;
+
+export const StyledDefaultColorOption = styled(StyledColorOption)`
+    background: linear-gradient(-45deg, #fff 48%, #ff001e 0, #ff001e 52%, #fff 0) no-repeat;
 `;
 
 export const StyledColorIcon = styled.span<{ bgColor: string | undefined }>`

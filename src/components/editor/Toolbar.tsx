@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function MenuBar({ editor }: Props) {
-    const menuItems = [
+    const menuItems: EditorMenuItem[][] = [
         [
             {
                 type: "dropdown",
@@ -68,35 +68,21 @@ export default function MenuBar({ editor }: Props) {
             },
             {
                 type: "colorSelect",
-                options: [
-                    {
-                        title: "default",
-                        action: () => editor.chain().focus().setColor("#000000").run(),
-                        isActive: () => false,
-                    },
-                    ...colors.map((val) => ({
-                        title: val,
-                        action: () => editor.chain().focus().setColor(val).run(),
-                        isActive: () => editor.isActive("textStyle", { color: val }),
-                    })),
-                ],
-                changeColor: (value: string) => editor.chain().focus().setColor(value).run(),
+                options: colors.map((color) => ({
+                    color,
+                })),
+                action: (value: string) => editor.chain().focus().setColor(value).run(),
+                isActive: (value: string) => editor.isActive("textStyle", { color: value }),
+                getAttributes: () => editor.getAttributes("textStyle").color,
             },
             {
                 type: "bgColorSelect",
-                options: [
-                    {
-                        title: "default",
-                        action: () => editor.chain().focus().setHighlight({ color: "#ffffff" }).run(),
-                        isActive: () => false,
-                    },
-                    ...colors.map((val) => ({
-                        title: val,
-                        action: () => editor.chain().focus().setHighlight({ color: val }).run(),
-                        isActive: () => editor.isActive("highlight", { color: val }),
-                    })),
-                ],
-                changeColor: (value: string) => editor.chain().focus().setHighlight({ color: value }).run(),
+                options: colors.map((color) => ({
+                    color,
+                })),
+                action: (value: string) => editor.chain().focus().setHighlight({ color: value }).run(),
+                isActive: (value: string) => editor.isActive("highlight", { color: value }),
+                getAttributes: () => editor.getAttributes("highlight").color,
             },
         ],
         [
