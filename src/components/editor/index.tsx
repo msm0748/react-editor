@@ -5,8 +5,10 @@ import TextStyle from "@tiptap/extension-text-style";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import Toolbar from "./Toolbar";
-import { StyledEditor } from "./Eiditor.styled";
 import Highlight from "@tiptap/extension-highlight";
+import { StyledEditor } from "./Eiditor.styled";
+import BubbleMenu from "@tiptap/extension-bubble-menu";
+import Link from "@tiptap/extension-link";
 
 export default function Editor() {
     // const [editorContent, setEditorContent] = useState("");
@@ -17,8 +19,13 @@ export default function Editor() {
             Color,
             TextStyle,
             Underline,
+            BubbleMenu,
             TextAlign.configure({
                 types: ["heading", "paragraph"],
+            }),
+            Link.configure({
+                openOnClick: false,
+                autolink: true,
             }),
             Highlight.configure({ multicolor: true }),
         ],

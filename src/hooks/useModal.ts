@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 
 type UseSelectReturn = [isOpen: boolean, selectRef: React.RefObject<HTMLDivElement>, toggleOpen: () => void];
 
-export function useModal(): UseSelectReturn {
+export default function useModal(): UseSelectReturn {
     const [isOpen, setIsOpen] = useState(false);
     const selectRef = useRef<HTMLDivElement>(null);
     const toggleOpen = useCallback(() => {

@@ -56,11 +56,11 @@ export const StyledOption = styled.div<{ isSelected: boolean }>`
     }
 `;
 
-export const StyledColorOptionContainer = styled.div`
+export const StyledColorOptionContainer = styled.div<{ width: number }>`
     position: absolute;
     top: 100%;
     left: 0;
-    width: 154px;
+    width: ${({ width }) => width}px;
     border: 1px solid #ccc;
     z-index: 10;
     border-radius: 0 0 4px 4px;
@@ -198,11 +198,27 @@ export const StyledMoreButton = styled.div<{ isOpen: boolean }>`
     }
 `;
 
-export const StyledConfirmButton = styled.button`
+export const StyledConfirmButton = styled.button<{ disabled?: boolean }>`
     width: 122px;
     height: 30px;
-    color: #333;
+    color: ${({ disabled }) => (disabled ? "#ddd" : "#333")};
     background-color: #fff;
     border: 1px solid #ddd;
     cursor: pointer;
+`;
+
+export const StyledInput = styled.input`
+    padding: 0 0 4px;
+    font-size: 13px;
+    height: 27px;
+    border: none;
+    border-bottom: 1px solid #e3e3e3;
+    letter-spacing: -0.6px;
+    color: #333333;
+    display: block;
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: transparent;
+    line-height: 15px;
 `;

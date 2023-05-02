@@ -1,5 +1,5 @@
 import { StyledArrowIcon, StyledOption, StyledOptionList, StyledSelectBox, StyledSelectContainer, StyledSelectedOption } from "./Select.styled";
-import { useModal } from "./useModal";
+import useModal from "../../../hooks/useModal";
 
 export function DropDown({ options }: EditorDropDownProps) {
     const [isOpen, selectRef, toggleOpen] = useModal();

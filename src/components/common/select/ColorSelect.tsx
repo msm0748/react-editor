@@ -14,7 +14,7 @@ import {
     StyledConfirmButton,
     StyledDefaultColorOption,
 } from "./Select.styled";
-import { useModal } from "./useModal";
+import useModal from "../../../hooks/useModal";
 import { StyledMenuButton } from "../button/Button.styld";
 
 interface Props extends EditorColorSelectProps {
@@ -89,7 +89,7 @@ export function ColorSelect({ options, mode, action, isActive, getAttributes }: 
                 )}
             </StyledMenuButton>
             {isOpen && (
-                <StyledColorOptionContainer>
+                <StyledColorOptionContainer width={154}>
                     {colors.length > 0 && (
                         <StyledColorOptionWrap>
                             {mode === "color" ? <span>최근 사용한 글자색</span> : <span>최근 사용한 배경색</span>}

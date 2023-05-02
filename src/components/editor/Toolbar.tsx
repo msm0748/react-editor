@@ -136,7 +136,22 @@ export default function MenuBar({ editor }: Props) {
                 type: "button",
                 icon: <Icon icon="horizontalRule" />,
                 title: "구분선",
-                action: () => editor.chain().focus().setHorizontalRule().run(),
+                action: () => {
+                    editor.chain().focus().setHorizontalRule().run();
+                    editor.chain().focus().setHardBreak().run();
+                },
+                isActive: () => editor.isActive("horizontalRule"),
+            },
+            {
+                type: "link",
+                icon: <Icon icon="link" />,
+                title: "링크",
+                isDragging: !editor.state.selection.empty,
+                action: (url: string) => editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run(),
+                customAction: (url: string, title?: string) => editor.chain().focus().insertContent(`<a href="${url}">${url}</a>`).run(),
+                unset: () => editor.chain().focus().unsetLink().run(),
+                isActive: () => editor.isActive("link"),
+                getAttributes: () => editor.getAttributes("link").href,
             },
         ],
     ];
@@ -150,6 +165,7 @@ export default function MenuBar({ editor }: Props) {
                     ))}
                 </div>
             ))}
+            <button onClick={() => editor.commands.createParagraphNear()}>link</button>
         </StyledToolbar>
     );
 }

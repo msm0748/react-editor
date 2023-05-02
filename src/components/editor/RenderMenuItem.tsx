@@ -1,5 +1,5 @@
 import { EditorMenuButton } from "../common/button";
-import { DropDown, ColorSelect } from "../common/select";
+import { DropDown, ColorSelect, Link } from "../common/select";
 
 export default function RenderMenuItem(item: EditorMenuItem) {
     switch (item.type) {
@@ -15,6 +15,19 @@ export default function RenderMenuItem(item: EditorMenuItem) {
             return item.options ? (
                 <ColorSelect options={item.options} action={item.action} isActive={item.isActive} getAttributes={item.getAttributes} mode="bgColor" />
             ) : null;
+        case "link":
+            return (
+                <Link
+                    icon={item.icon}
+                    isDragging={item.isDragging}
+                    action={item.action}
+                    customAction={item.customAction}
+                    isActive={item.isActive}
+                    title={item.title}
+                    unset={item.unset}
+                    getAttributes={item.getAttributes}
+                ></Link>
+            );
         default:
             return null;
     }
