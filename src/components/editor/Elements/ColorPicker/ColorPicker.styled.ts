@@ -1,74 +1,6 @@
 import styled from "@emotion/styled";
 
-export const StyledSelectContainer = styled.div`
-    position: relative;
-`;
-
-export const StyledSelectBox = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 4px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    user-select: none;
-`;
-
-export const StyledSelectedOption = styled.div`
-    font-size: 16px;
-`;
-
-export const StyledArrowIcon = styled.div<{ isOpen: boolean }>`
-    margin-left: 10px;
-    font-size: 12px;
-    transform: ${({ isOpen }) => (isOpen ? "rotate(-180deg)" : "rotate(0)")};
-    transition: transform 0.2s ease-in-out;
-`;
-
-export const StyledOptionList = styled.div`
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    max-height: 160px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    border-top: none;
-    border-radius: 0 0 4px 4px;
-    background-color: #fff;
-    z-index: 10;
-`;
-
-export const StyledOption = styled.div<{ isSelected: boolean }>`
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 8px 12px;
-    font-size: 14px;
-    color: ${({ isSelected }) => (isSelected ? "#fff" : "#333")};
-    background-color: ${({ isSelected }) => (isSelected ? "#333" : "transparent")};
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-
-    &:hover {
-        background-color: ${({ isSelected }) => (isSelected ? "" : "#f2f2f2")};
-    }
-`;
-
-export const StyledColorOptionContainer = styled.div<{ width: number }>`
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: ${({ width }) => width}px;
-    border: 1px solid #ccc;
-    z-index: 10;
-    border-radius: 0 0 4px 4px;
-    background-color: #fff;
-    box-sizing: border-box;
-`;
-
-export const StyledColorOptionWrap = styled.div`
+export const StyledOptionWrap = styled.div`
     & > div {
         padding: 5px 6px;
     }
@@ -82,12 +14,12 @@ export const StyledColorOptionWrap = styled.div`
     }
 `;
 
-export const StyledColorOptionList = styled.div`
+export const StyledOptionList = styled.div`
     display: flex;
     flex-wrap: wrap;
 `;
 
-export const StyledColorOption = styled.div<{ bgColor: string; isSelected?: boolean }>`
+export const StyledOptionItem = styled.div<{ bgColor: string; isSelected?: boolean }>`
     width: 16px;
     height: 16px;
     margin: 1px;
@@ -114,7 +46,7 @@ export const StyledColorOption = styled.div<{ bgColor: string; isSelected?: bool
     }
 `;
 
-export const StyledDefaultColorOption = styled(StyledColorOption)`
+export const StyledDefaultOptionItem = styled(StyledOptionItem)`
     background: linear-gradient(-45deg, #fff 48%, #ff001e 0, #ff001e 52%, #fff 0) no-repeat;
 `;
 
@@ -196,29 +128,4 @@ export const StyledMoreButton = styled.div<{ isOpen: boolean }>`
             vertical-align: middle;
         }
     }
-`;
-
-export const StyledConfirmButton = styled.button<{ disabled?: boolean }>`
-    width: 122px;
-    height: 30px;
-    color: ${({ disabled }) => (disabled ? "#ddd" : "#333")};
-    background-color: #fff;
-    border: 1px solid #ddd;
-    cursor: pointer;
-`;
-
-export const StyledInput = styled.input`
-    padding: 0 0 4px;
-    font-size: 13px;
-    height: 27px;
-    border: none;
-    border-bottom: 1px solid #e3e3e3;
-    letter-spacing: -0.6px;
-    color: #333333;
-    display: block;
-    outline: none;
-    box-sizing: border-box;
-    width: 100%;
-    background-color: transparent;
-    line-height: 15px;
 `;

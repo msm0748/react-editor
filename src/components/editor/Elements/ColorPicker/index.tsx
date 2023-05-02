@@ -1,27 +1,25 @@
 import { useEffect, useState } from "react";
 import { ChromePicker } from "react-color";
 
+import { StyledContainer, StyledOptionContainer, StyledConfirmButton } from "../Elements.styled";
+import useModal from "../../../../hooks/useModal";
+import { EditorCustomMenuButton } from "../../common/Button";
 import {
-    StyledColorOption,
-    StyledSelectContainer,
-    StyledColorOptionList,
-    StyledColorIcon,
-    StyledColorOptionContainer,
-    StyledColorOptionWrap,
     StyledBgColorIcon,
-    StyledMoreButton,
     StyledChromePicker,
-    StyledConfirmButton,
-    StyledDefaultColorOption,
-} from "./Select.styled";
-import useModal from "../../../hooks/useModal";
-import { StyledMenuButton } from "../button/Button.styld";
+    StyledColorIcon,
+    StyledDefaultOptionItem,
+    StyledMoreButton,
+    StyledOptionItem,
+    StyledOptionList,
+    StyledOptionWrap,
+} from "./ColorPicker.styled";
 
-interface Props extends EditorColorSelectProps {
+interface Props extends EditorColorPickerProps {
     mode: "color" | "bgColor";
 }
 
-export function ColorSelect({ options, mode, action, isActive, getAttributes }: Props) {
+export function ColorPicker({ title, options, mode, action, isActive, getAttributes }: Props) {
     const [isOpen, selectRef, toggleOpen] = useModal();
 
     const [color, setColor] = useState<string>("");
@@ -78,8 +76,8 @@ export function ColorSelect({ options, mode, action, isActive, getAttributes }: 
     }, [selectRef, color]);
 
     return (
-        <StyledSelectContainer ref={selectRef}>
-            <StyledMenuButton className={"menu-ite"} onClick={toggleOpen}>
+        <StyledContainer ref={selectRef}>
+            <EditorCustomMenuButton title={title} action={toggleOpen}>
                 {mode === "color" ? (
                     <StyledColorIcon bgColor={color}>T</StyledColorIcon>
                 ) : (
@@ -87,32 +85,32 @@ export function ColorSelect({ options, mode, action, isActive, getAttributes }: 
                         T
                     </StyledBgColorIcon>
                 )}
-            </StyledMenuButton>
+            </EditorCustomMenuButton>
             {isOpen && (
-                <StyledColorOptionContainer width={154}>
+                <StyledOptionContainer width={154}>
                     {colors.length > 0 && (
-                        <StyledColorOptionWrap>
+                        <StyledOptionWrap>
                             {mode === "color" ? <span>최근 사용한 글자색</span> : <span>최근 사용한 배경색</span>}
-                            <StyledColorOptionList>
+                            <StyledOptionList>
                                 {colors.map((color, index) => (
-                                    <StyledColorOption key={index} bgColor={color} onClick={() => handleSelectedColor(color)}></StyledColorOption>
+                                    <StyledOptionItem key={index} bgColor={color} onClick={() => handleSelectedColor(color)}></StyledOptionItem>
                                 ))}
-                            </StyledColorOptionList>
-                        </StyledColorOptionWrap>
+                            </StyledOptionList>
+                        </StyledOptionWrap>
                     )}
 
-                    <StyledColorOptionWrap>
-                        <StyledColorOptionList>
-                            <StyledDefaultColorOption bgColor={"default"} onClick={() => handleSelectedColor("default")}></StyledDefaultColorOption>
+                    <StyledOptionWrap>
+                        <StyledOptionList>
+                            <StyledDefaultOptionItem bgColor={"default"} onClick={() => handleSelectedColor("default")}></StyledDefaultOptionItem>
                             {options.map((option, index) => (
-                                <StyledColorOption
+                                <StyledOptionItem
                                     key={index}
                                     isSelected={isActive(option.color)}
                                     bgColor={option.color}
                                     onClick={() => handleSelectedColor(option.color)}
-                                ></StyledColorOption>
+                                ></StyledOptionItem>
                             ))}
-                        </StyledColorOptionList>
+                        </StyledOptionList>
                         {isChromePickerOpen && (
                             <StyledChromePicker>
                                 <ChromePicker disableAlpha color={chromePickercolor} onChange={(color) => setChromePickerColor(color.hex)} />
@@ -123,9 +121,9 @@ export function ColorSelect({ options, mode, action, isActive, getAttributes }: 
                         <StyledMoreButton isOpen={isChromePickerOpen} onClick={() => setIsChromePickerOpen((prev) => !prev)}>
                             <span>{isChromePickerOpen ? "접기" : "더 보기"}</span>
                         </StyledMoreButton>
-                    </StyledColorOptionWrap>
-                </StyledColorOptionContainer>
+                    </StyledOptionWrap>
+                </StyledOptionContainer>
             )}
-        </StyledSelectContainer>
+        </StyledContainer>
     );
 }

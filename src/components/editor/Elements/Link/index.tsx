@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
-import { EditorMenuButton } from "../button";
-import { StyledColorOptionContainer, StyledConfirmButton, StyledInput, StyledSelectContainer } from "./Select.styled";
-import useModal from "../../../hooks/useModal";
-import useInput from "../../../hooks/useInput";
-import styled from "@emotion/styled";
+import { EditorMenuButton } from "../../common/Button";
+import { StyledOptionContainer, StyledConfirmButton, StyledContainer } from "../Elements.styled";
+import useModal from "../../../../hooks/useModal";
+import useInput from "../../../../hooks/useInput";
+import { StyledButtonWrap, StyledInput } from "./Link.styled";
 
-export function Link({ title, icon, isDragging, action, customAction, unset, isActive, getAttributes }: EditorLinkTpye) {
+export function Link({ title, icon, isDragging, action, customAction, unset, isActive, getAttributes }: EditorLinkProps) {
     const urlInputRef = useRef<HTMLInputElement>(null);
     const [isOpen, selectRef, toggleOpen] = useModal();
     const [url, onChangeUrl] = useInput();
@@ -45,10 +45,10 @@ export function Link({ title, icon, isDragging, action, customAction, unset, isA
     }, [isOpen]);
 
     return (
-        <StyledSelectContainer ref={selectRef}>
+        <StyledContainer ref={selectRef}>
             <EditorMenuButton title={title} icon={icon} action={handleAction} isActive={isActive} />
             {isOpen && (
-                <StyledColorOptionContainer width={300} style={{ padding: "18px 22px" }}>
+                <StyledOptionContainer width={300} style={{ padding: "18px 22px" }}>
                     <form onSubmit={handleConfirm}>
                         <StyledInput ref={urlInputRef} type="text" value={url} onChange={onChangeUrl} placeholder="URL" />
                         <StyledButtonWrap>
@@ -62,14 +62,8 @@ export function Link({ title, icon, isDragging, action, customAction, unset, isA
                             </StyledConfirmButton>
                         </StyledButtonWrap>
                     </form>
-                </StyledColorOptionContainer>
+                </StyledOptionContainer>
             )}
-        </StyledSelectContainer>
+        </StyledContainer>
     );
 }
-
-const StyledButtonWrap = styled.div`
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-`;

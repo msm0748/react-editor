@@ -1,8 +1,8 @@
 import { Editor } from "@tiptap/react";
 import Icon from "../common/Icon";
 import { colors } from "./defaultColors";
-import RenderMenuItem from "./RenderMenuItem";
-import { StyledToolbar } from "./Eiditor.styled";
+import RenderMenuItem from "./Render";
+import { StyledToolbar } from "./Toolbar.styled";
 
 interface Props {
     editor: Editor;
@@ -12,7 +12,7 @@ export default function MenuBar({ editor }: Props) {
     const menuItems: EditorMenuItem[][] = [
         [
             {
-                type: "dropdown",
+                type: "heading",
                 options: [
                     {
                         title: "제목1",
@@ -67,7 +67,8 @@ export default function MenuBar({ editor }: Props) {
                 isActive: () => editor.isActive("strike"),
             },
             {
-                type: "colorSelect",
+                type: "colorPicker",
+                title: "글자색",
                 options: colors.map((color) => ({
                     color,
                 })),
@@ -76,7 +77,8 @@ export default function MenuBar({ editor }: Props) {
                 getAttributes: () => editor.getAttributes("textStyle").color,
             },
             {
-                type: "bgColorSelect",
+                type: "bgColorPicker",
+                title: "배경색",
                 options: colors.map((color) => ({
                     color,
                 })),
@@ -148,7 +150,7 @@ export default function MenuBar({ editor }: Props) {
                 title: "링크",
                 isDragging: !editor.state.selection.empty,
                 action: (url: string) => editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run(),
-                customAction: (url: string, title?: string) => editor.chain().focus().insertContent(`<a href="${url}">${url}</a>`).run(),
+                customAction: (url: string) => editor.chain().focus().insertContent(`<a href="${url}">${url}</a>`).run(),
                 unset: () => editor.chain().focus().unsetLink().run(),
                 isActive: () => editor.isActive("link"),
                 getAttributes: () => editor.getAttributes("link").href,
@@ -165,7 +167,6 @@ export default function MenuBar({ editor }: Props) {
                     ))}
                 </div>
             ))}
-            <button onClick={() => editor.commands.createParagraphNear()}>link</button>
         </StyledToolbar>
     );
 }
