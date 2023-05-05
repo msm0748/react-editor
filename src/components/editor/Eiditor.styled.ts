@@ -23,6 +23,12 @@ export const StyledEditor = styled.div`
             padding-left: 30px;
         }
 
+        blockquote {
+            border-left: 3px solid rgba(13, 13, 13, 0.1);
+            padding-left: 1rem;
+            margin-left: 0;
+        }
+
         table {
             border-collapse: collapse;
             margin: 0;

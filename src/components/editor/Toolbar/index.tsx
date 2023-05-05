@@ -155,6 +155,13 @@ export default function MenuBar({ editor }: Props) {
                 isActive: () => editor.isActive("link"),
                 getAttributes: () => editor.getAttributes("link").href,
             },
+            {
+                type: "button",
+                icon: <Icon icon={"blockquote"} />,
+                title: "인용구",
+                action: () => editor.chain().focus().toggleBlockquote().run(),
+                isActive: () => editor.isActive("blockquote"),
+            },
         ],
     ];
 

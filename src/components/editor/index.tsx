@@ -8,6 +8,7 @@ import Toolbar from "./Toolbar";
 import Highlight from "@tiptap/extension-highlight";
 import { StyledEditor } from "./Eiditor.styled";
 import BubbleMenu from "@tiptap/extension-bubble-menu";
+import Blockquote from "@tiptap/extension-blockquote";
 import Link from "@tiptap/extension-link";
 
 export default function Editor() {
@@ -20,6 +21,7 @@ export default function Editor() {
             TextStyle,
             Underline,
             BubbleMenu,
+            Blockquote,
             TextAlign.configure({
                 types: ["heading", "paragraph"],
             }),
