@@ -23,12 +23,14 @@ export const StyledEditor = styled.div`
             padding-left: 30px;
         }
 
+        /** Blockquote Style */
         blockquote {
             border-left: 3px solid rgba(13, 13, 13, 0.1);
             padding-left: 1rem;
             margin-left: 0;
         }
 
+        /** Table Style */
         table {
             border-collapse: collapse;
             margin: 0;
@@ -78,7 +80,76 @@ export const StyledEditor = styled.div`
                 width: 4px;
             }
         }
+
+        /** CodeBlock Style */
+        pre {
+            background: #0d0d0d;
+            border-radius: 0.5rem;
+            color: #fff;
+            font-family: "JetBrainsMono", monospace;
+            padding: 0.75rem 1rem;
+
+            code {
+                background: none;
+                color: inherit;
+                font-size: 0.8rem;
+                padding: 0;
+            }
+
+            .hljs-comment,
+            .hljs-quote {
+                color: #616161;
+            }
+
+            .hljs-variable,
+            .hljs-template-variable,
+            .hljs-attribute,
+            .hljs-tag,
+            .hljs-name,
+            .hljs-regexp,
+            .hljs-link,
+            .hljs-name,
+            .hljs-selector-id,
+            .hljs-selector-class {
+                color: #f98181;
+            }
+
+            .hljs-number,
+            .hljs-meta,
+            .hljs-built_in,
+            .hljs-builtin-name,
+            .hljs-literal,
+            .hljs-type,
+            .hljs-params {
+                color: #fbbc88;
+            }
+
+            .hljs-string,
+            .hljs-symbol,
+            .hljs-bullet {
+                color: #b9f18d;
+            }
+
+            .hljs-title,
+            .hljs-section {
+                color: #faf594;
+            }
+
+            .hljs-keyword,
+            .hljs-selector-tag {
+                color: #70cff8;
+            }
+
+            .hljs-emphasis {
+                font-style: italic;
+            }
+
+            .hljs-strong {
+                font-weight: 700;
+            }
+        }
     }
+
     .tableWrapper {
         padding: 1rem 0;
         overflow-x: auto;

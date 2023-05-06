@@ -10,6 +10,17 @@ import { StyledEditor } from "./Eiditor.styled";
 import BubbleMenu from "@tiptap/extension-bubble-menu";
 import Blockquote from "@tiptap/extension-blockquote";
 import Link from "@tiptap/extension-link";
+import css from "highlight.js/lib/languages/css";
+import js from "highlight.js/lib/languages/javascript";
+import ts from "highlight.js/lib/languages/typescript";
+import html from "highlight.js/lib/languages/xml";
+import { lowlight } from "lowlight";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
+
+lowlight.registerLanguage("html", html);
+lowlight.registerLanguage("css", css);
+lowlight.registerLanguage("js", js);
+lowlight.registerLanguage("ts", ts);
 
 export default function Editor() {
     // const [editorContent, setEditorContent] = useState("");
@@ -22,6 +33,9 @@ export default function Editor() {
             Underline,
             BubbleMenu,
             Blockquote,
+            CodeBlockLowlight.configure({
+                lowlight,
+            }),
             TextAlign.configure({
                 types: ["heading", "paragraph"],
             }),
